@@ -1,0 +1,64 @@
+createdAt: "2021-11-15T14:21:25.639Z"
+updatedAt: "2021-11-15T14:29:02.342Z"
+type: "MARKDOWN_NOTE"
+folder: "567a491cb44891144d0f"
+title: "Database"
+tags: []
+content: '''
+  # Database
+      pip install psycopg2 : install postgreSQL
+  ### Buat database terlebih dahulu di pgAdmin dengan nama
+      
+      BarangDB
+      
+  di settings.py dir barangjual
+  !!! note settings.py
+  ```python
+  ...
+  DATABASES = {
+      'default': {
+          'ENGINE': 'django.db.backends.postgresql',
+          'NAME': 'BarangDB',
+          'USER': 'postgres',
+          'PASSWORD': 'admin',
+          'HOST': 'localhost'
+      }
+  }
+  ...
+  ```
+  !!!
+  
+  setelah proses ini lakukan, 
+      
+      python manage.py migrate
+      
+  Akan terbentk 10 table dasar dari djanggo di BarangDB
+  
+  di dir barang
+  
+  !!! note models.py 
+  ```python
+  from django.db import models
+  
+  # Create your models here.
+  
+  class Position(models.Model):
+      title = models.CharField(max_length=50)
+  
+  class Barang(models.Model):
+      namabarang = models.CharField(max_length=100)
+      harga = models.CharField(max_length=100)
+      keterangan = models.CharField(max_length=100)
+      position = models.ForeignKey(Position, on_delete=models.CASCADE)
+  ```
+  !!!
+      
+      
+      python manage.py makemigrations barang : generate file untuk migrasi ke db
+      python manage.py sqlmigrate barang 0001 : 001 adalah nama sesuai file yg ter generate 
+      python manage.py migrate : membuat table berdasarkan model yg kita buat sebelumnya
+      
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

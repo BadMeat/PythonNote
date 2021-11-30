@@ -1,0 +1,72 @@
+createdAt: "2021-11-16T15:19:40.093Z"
+updatedAt: "2021-11-16T15:21:55.875Z"
+type: "MARKDOWN_NOTE"
+folder: "1caa3b85f7d9c823c9a6"
+title: "Html form"
+tags: []
+content: '''
+  # Html form
+  
+  !!! note barang_form.html
+  ```html
+  {% extends "barang/base.html" %}
+  {% load crispy_forms_tags %}
+  
+  {% block content %}
+  <form action="" method="post" autocomplete="off">
+      {% csrf_token %}
+      <!-- {{form|crispy}} -->
+      {{form.namabarang|as_crispy_field}}
+      {{form.harga|as_crispy_field}}
+      <div class="row">
+          <div class="col-md-4">
+              {{form.keterangan|as_crispy_field}}
+          </div>
+          <div class="col md-8">
+              {{form.position|as_crispy_field}}
+          </div>
+      </div>
+      <div class="mt-2">
+          <button type="submit" class="btn btn-success"><i class="fas fa-database"></i> Submit</button>
+      </div>
+  </form>
+  
+  {% endblock content %}
+  ```
+  !!!
+  
+  {{form.namabarang|as_crispy_field}}
+  ~ Menampilkan nama barang sebagai field input
+  
+  !!! note barang_list.html
+  ```html
+  {% extends "barang/base.html" %}
+  
+  {% block content %}
+  
+  <table class="table table-borderless">
+      <thead class="border-bottom font-weight-bold">
+          <tr>
+              <td>Nama Barang</td>
+              <td>Harga</td>
+              <td>Position</td>
+          </tr>
+      </thead>
+      <tbody>
+          {% for barang in barang_list %}
+              <tr>
+                  <td>{{barang.namabarang}}</td>
+                  <td>{{barang.harga}}</td>
+                  <td>{{barang.position}}</td>
+              </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+  
+  {% endblock content %}
+  ```
+  !!!
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

@@ -1,0 +1,96 @@
+createdAt: "2021-11-16T15:09:09.601Z"
+updatedAt: "2021-11-17T07:47:05.830Z"
+type: "MARKDOWN_NOTE"
+folder: "567a491cb44891144d0f"
+title: "Form, Save, View"
+tags: []
+content: '''
+  # Form, Save, View
+  
+      pip install django-crispy-forms
+      
+  Tambahkan forms.py di dir barang
+  !!! note forms.py
+  ```python
+  from django import forms
+  from django.forms import fields
+  from .models import Barang
+  
+  class BarangForm(forms.ModelForm):
+      class Meta: 
+          model = Barang
+          fields = '__all__'
+          # fields = ('namabarang','keterangan')
+          labels = {
+              'namabarang' : 'Nama Barang'
+          }
+  
+      def __init__(self, *args, **kwargs):
+          super(BarangForm, self).__init__(*args, **kwargs)
+          self.fields['position'].empty_label = "...Pilih..."
+          self.fields['keterangan'].required = False
+  ```
+  !!!
+  
+  self.fields['keterangan'].required = False
+  ~ ini untuk menjadikan keterangan tidak mandatory
+  self.fields['position'].empty_label = "...Pilih..."
+  ~ menjadikan combo box defaultnya ...Pilih...
+  
+  ---
+  
+  !!! note models.py
+  ```python
+  from django.db import models
+  
+  # Create your models here.
+  
+  class Position(models.Model):
+      title = models.CharField(max_length=50)
+  
+      def __str__(self):
+          return self.title
+  ```
+  !!!
+  
+  return self.title
+  ~ Ini seperti toString, jadi balikannya string bukan object ketika dipanggil
+  
+  !!! note views.py 
+  ```python
+  from django.shortcuts import redirect, render, redirect
+  
+  from barang.models import Barang
+  
+  from .forms import BarangForm
+  
+  def barang_list(request):
+      context = {'barang_list' : Barang.objects.all()}
+      return render(request, "barang/barang_list.html", context)
+  
+  def barang_form(request):
+      if request.method == "GET":
+          form = BarangForm()
+          return render(request, "barang/barang_form.html", {'form': form})
+      else:
+          form = BarangForm(request.POST)
+          if form.is_valid():
+              form.save()
+          return redirect('/barang/list')
+  def barang_delete(request):
+      return
+  ```
+  !!!
+  if request.method == "GET":
+  ~ jadi ketika GET atau waktu url biasa dipanggil akan menampilkan barang_form dengan BarangForm() object kosong / form baru
+  else form = BarangForm(request.POST)
+  ~ jadi ketika post / submit formnya maka akan save ke database dan redirect ke list
+  context = {'barang_list' : Barang.objects.all()}
+  ~ menampilkan semua barang dari database dan tampilkan di barang_list.html
+  
+  ## Html
+  [Html form](:note:944fb201-2528-4d10-9d4e-afee43b8652e)
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

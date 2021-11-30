@@ -1,0 +1,56 @@
+createdAt: "2021-11-15T09:56:46.067Z"
+updatedAt: "2021-11-30T00:37:29.929Z"
+type: "MARKDOWN_NOTE"
+folder: "567a491cb44891144d0f"
+title: "Install"
+tags: []
+content: '''
+  # Install
+  
+  [Download Python \\| Python.org](https://www.python.org/downloads/)
+    
+  ## Create Project
+  
+      1. Buat directori dulu, misal barang kemudian masuk ke dalam directori itu
+      2. Aktifkan env terlebih dahulu dengan ketikan : python -m venv venv 
+      3. Aktifkan evn dengan ketikan : venv\\Scripts\\activate
+      4. Install django nya dong : pip install django
+      5. Baru deh install projectnya : django-admin startproject barangjual
+      6. Bisa langsung dijalankan tp harus masuk dir barangjual dulu, cd barangjual kemudian : python manage.py runserver
+      7. Bisa diakses dengan http://127.0.0.1:8000
+      8. Kemudian buat lagi untuk kayak sub prjectnya, Masuk ke directory barangjual kemudian ketik
+      10. python manage.py startapp barang, akan terbentuk dir barang
+  
+  di settings.py dir barangjual, tambahkan ini untuk menambahkan barang yg dibuat tadi ke project
+  ```python
+  INSTALLED_APPS = [
+      ...
+      'barang'
+  ]
+  ```
+  
+  ## Utils
+       1. python -m pip install --upgrade pip : update pip
+       2. python manage.py runserver 9000 : run server di port 9000
+       3. django-admin : untuk melihat command jango
+       4. pip install pipenv : Untuk install dependencies
+  
+  ## Run di VS Code
+      1. Install python extention ini dulu di vs code
+  
+  ![e79bf4f1.png](:storage\\c4d4f24d-2f68-498f-89a1-27f03e90165b\\e79bf4f1.png)
+      
+      2. ctrl + shift + p, pilih python select interpreter
+      3. enter interpreter path..
+      4. pilih python.exe di dir venv/Scripts/python.exe yg dibuat di awal
+      5. close vscode dulu kemudian baru bisa run python manage.py runserver
+  
+  ![Screenshot_128.png](:storage\\c4d4f24d-2f68-498f-89a1-27f03e90165b\\eabbe616.png)
+  
+      6. Kalau sudah akan muncul ini dibawah pojok kiri vscodenya
+  
+  ![Screenshot_129.png](:storage\\c4d4f24d-2f68-498f-89a1-27f03e90165b\\f61dc96d.png)
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

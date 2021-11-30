@@ -1,0 +1,75 @@
+createdAt: "2021-11-17T07:47:08.732Z"
+updatedAt: "2021-11-17T07:58:55.789Z"
+type: "MARKDOWN_NOTE"
+folder: "567a491cb44891144d0f"
+title: "Form, update, delete"
+tags: []
+content: '''
+  # Form, update, delete
+  
+  urls.py di dir barang
+  !!! note urls.py
+  ```python
+  from django.urls import path, include
+  from . import views
+  
+  urlpatterns = [
+      path('', views.barang_form, name='barang_insert'),
+      path('<int:id>/', views.barang_form, name="barang_update"),
+      path('list/',views.barang_list, name='barang_list'),
+      path('delete/<int:id>/',views.barang_delete, name='barang_delete')
+  ]
+  ```
+  !!!
+  
+  name="barang_insert"
+  ~ Ini untuk alias
+  
+  !!! note view.py
+  ```python
+  from django.shortcuts import redirect, render, redirect
+  
+  from barang.models import Barang
+  
+  from .forms import BarangForm
+  
+  # Create your views here.
+  
+  def barang_list(request):
+      context = {'barang_list' : Barang.objects.all()}
+      return render(request, "barang/barang_list.html", context)
+  
+  def barang_form(request, id=0):
+      if request.method == "GET":
+          if id==0:
+              form = BarangForm()
+          else: 
+              barang = Barang.objects.get(pk=id) 
+              form = BarangForm(instance=barang)   
+          return render(request, "barang/barang_form.html", {'form': form})
+      else:
+          if id == 0:
+              form = BarangForm(request.POST)
+          else: 
+              barang = Barang.objects.get(pk=id) 
+              form = BarangForm(request.POST,instance=barang)
+          if form.is_valid():
+              form.save()
+          return redirect('/barang/list')
+          
+  def barang_delete(request,id):
+      barang = Barang.objects.get(pk=id) 
+      barang.delete()
+      return redirect('/barang/list')
+  ```
+  !!!
+  form = BarangForm()
+  ~ Ini untuk form baru yg kosong
+  form = BarangForm(instance=barang)
+  ~ Ini untuk update
+  
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

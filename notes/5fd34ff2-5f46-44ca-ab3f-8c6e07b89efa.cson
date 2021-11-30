@@ -1,0 +1,115 @@
+createdAt: "2021-11-15T14:09:16.714Z"
+updatedAt: "2021-11-30T00:39:00.869Z"
+type: "MARKDOWN_NOTE"
+folder: "567a491cb44891144d0f"
+title: "Barang"
+tags: []
+content: '''
+  # Barang
+      
+  buat directory di dalam barang, templates/barang kemduian buat file html
+      
+      base.html
+      barang_form.html
+      barang_list.html
+      
+  buat file urls di dalam barang
+    
+      urls.py
+      
+  di dir barangjual, file 
+      
+      urls.py
+      
+  ### di dir barangjual tambahkan line ini : path('barang/',include('barang.urls'))
+  !!! note urls.py
+  ```python
+  from django.contrib import admin
+  from django.urls import path, include
+  
+  urlpatterns = [
+      path('admin/', admin.site.urls),
+      path('barang/',include('barang.urls'))
+  ]
+  
+  ```
+  !!!
+  ---
+  ### di dir barang
+  !!! note urls.py
+  ```python
+  from django.urls import path, include
+  from . import views
+  
+  urlpatterns = [
+      path('', views.barang_form),
+      path('list/',views.barang_list)
+  ]
+  ```
+  !!!
+  
+  !!! note views
+  ```python
+  from django.shortcuts import render
+  
+  # Create your views here.
+  
+  def barang_list(request):
+      return render(request, "barang/barang_list.html")
+  
+  def barang_form(request):
+      return render(request, "barang/barang_form.html")
+  
+  def barang_delete(request):
+      return
+  ```
+  !!!
+  --- HTML
+  !!! note base.html
+  ```html
+  <!DOCTYPE html>
+  <html lang="id-ID">
+  
+  <head profile="http://gmpg.org/xfn/11">
+      <meta content="text/html; charset=UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>barang</title>
+  </head>
+  
+  <body>
+      <!-- Biar bisa rendere child -->
+      {% block content %}
+      {% endblock content %}
+  </body>
+  
+  </html>
+  ```
+  !!!
+  
+  !!! note barang_from.html
+  ```python
+  {% extends "barang/base.html" %}
+  
+  {% block content %}
+  
+  <p>Barang djanggo buat implement operation</p>
+  
+  {% endblock content %}
+  ```
+  !!!
+  
+  !!! note barang_list.html
+  ```python
+  {% extends "barang/base.html" %}
+  
+  {% block content %}
+  
+  <p>List Barang djanggo buat implement operation</p>
+  
+  {% endblock content %}
+  ```
+  !!!
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false
